@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NewsViewModel>
+@{
+    ViewBag.Title = "News";
+}
+<div class="mb-2 mt-2">
+
+    <a class="btn btn-primary" asp-controller="News" asp-action="Create">
+        Add Records
+    </a>
+
+    <a class="btn btn-secondary" asp-controller="News" asp-action="Archive">
+        Deleted Records
+    </a>
+
+</div>
+
+<div class="mt-4">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>News</th>
+                <th>Publication Date</th>
+                <th>Creation Date</th>
+                <th>Author Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var news in Model)
+            {
+                <tr>
+                    <td>@news.Title</td>
+                    <td>@news.NewsDetails</td>
+                    <td>@news.PublicationDate</td>
+                    <td>@news.CreationDate</td>
+                    <td>@news.AuthorName</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                option
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="News" asp-action="Edit"
+                                   asp-route-NewsId="@news.Id">Edit</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="News" asp-action="Toggle"
+                                   asp-route-NewsId="@news.Id">Delete</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

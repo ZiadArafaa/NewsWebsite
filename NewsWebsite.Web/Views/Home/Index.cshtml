@@ -1,0 +1,19 @@
+﻿@model IEnumerable<NewsViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <br />
+    @foreach (var news in Model)
+    {
+        <div class="card mb-2 mt-2 m-1" style="width: 18rem;">
+            <a href="/Home/Card?id=@news.Id&date=@news.PublicationDate">
+                <img src="@news.Image" class="card-img-top" alt="News image">
+            </a>
+            <div class="card-body">
+                <h5><a href="/Home/Card?id=@news.Id&date=@news.PublicationDate">@news.Title</a></h5>
+            </div>
+        </div>
+    }
+
+</div>

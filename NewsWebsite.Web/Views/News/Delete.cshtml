@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NewsViewModel>
+@{
+    ViewBag.Title = "News";
+}
+<div class="mb-2 mt-2">
+
+    <a class="btn btn-primary" asp-controller="News" asp-action="Create">
+        Add Records
+    </a>
+
+    <a class="btn btn-secondary" asp-controller="News" asp-action="Index">
+        Records
+    </a>
+
+</div>
+
+<div class="mt-4">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>News</th>
+                <th>PublicationDate</th>
+                <th>CreationDate</th>
+                <th>AuthorName</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var news in Model)
+            {
+                <tr>
+                    <td>@news.Title</td>
+                    <td>@news.NewsDetails</td>
+                    <td>@news.PublicationDate</td>
+                    <td>@news.CreationDate</td>
+                    <td>@news.AuthorName</td>
+                    <td>
+                        <a class="btn bg-danger m-1" asp-controller="News" asp-action="Delete" asp-route-NewsId="@news.Id">Delete</a>
+                        <a class="btn bg-primary m-1" asp-controller="News" asp-action="Toggle" asp-route-NewsId="@news.Id">Restor</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

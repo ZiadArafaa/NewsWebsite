@@ -1,0 +1,36 @@
+﻿@model AuthorViewModel
+@{
+    ViewBag.Title = Model.Id.Equals(0)?"Create":"Edit";
+}
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+        <div class="login-wrap p-4 p-md-5">
+            <h3 class="text-center mb-4">@(Model.Id.Equals(0)?"Create":"Edit")</h3>
+            <form method="post" asp-controller="Authors" class="login-form">
+                @if (!Model.Id.Equals(0))
+                {
+                    <input type="hidden" value="@Model.Id" asp-for="Id">
+                }
+                <div class="form-group mb-4">
+                    <label asp-for="Name">Name</label>
+                    <input type="text" class="form-control rounded-left" placeholder="Name" asp-for="Name">
+                    <span asp-validation-for="Name"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Email">Email</label>
+                    <input type="text" class="form-control rounded-left" placeholder="Email"asp-for="Email" >
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AuthorViewModel>
+@{
+    ViewBag.Title = "Authors";
+}
+<div class="mb-2 mt-2">
+    <a class="btn btn-primary" asp-controller="Authors" asp-action="Create">
+        Add Records
+    </a>
+
+    <a class="btn btn-secondary" asp-controller="Authors" asp-action="Archive">
+        Deleted Records
+    </a>
+
+</div>
+
+<div class="mt-4">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var author in Model)
+            {
+                <tr>
+                    <td>@author.Name</td>
+                    <td>@author.Email</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                option
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Authors" asp-action="Edit"
+                                   asp-route-AuthorId="@author.Id">Edit</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Authors" asp-action="Toggle"
+                                   asp-route-AuthorId="@author.Id">Delete</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
